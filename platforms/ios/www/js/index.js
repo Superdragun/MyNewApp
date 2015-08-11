@@ -16,7 +16,11 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
 var app = {
+
+    var sfw;
+
     // Application Constructor
     initialize: function() {
         this.bindEvents();
@@ -33,6 +37,11 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
+
+        console.log("deviceready");
+        //initialize salesforce wrapper
+        sfw = new SalesforceWrapper();
+
         app.receivedEvent('deviceready');
     },
     // Update DOM on a Received Event
