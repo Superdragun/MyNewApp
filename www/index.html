@@ -68,6 +68,7 @@
                 ref.addEventListener('loadstop', function(evt) {
                     if (evt.url.startsWith(redirectUri)) {
                         ref.close();
+                        alert("in");
                         sessionCallback(unescape(evt.url));
                     }
                 });
