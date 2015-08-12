@@ -26,5 +26,7 @@
 
     <gap:plugin name="org.apache.cordova.camera" version="0.3.2" />
     <gap:plugin name="org.apache.cordova.device" />
+    <gap:plugin name="cordova-plugin-inappbrowser" />
+    <gap:plugin name="com.shazron.cordova.plugin.keychainutil" version="1.0.0" />
 
 </widget>
