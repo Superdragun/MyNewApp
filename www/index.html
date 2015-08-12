@@ -80,9 +80,10 @@
                 var ref = window.open(getAuthorizeUrl(loginUrl, clientId, redirectUri), 
                                       '_blank', 'location=no,toolbar=no');
                 ref.addEventListener('loadstop', function(evt) {
+                    alert("in");
                     if (evt.url.startsWith(redirectUri)) {
                         ref.close();
-                        alert("in");
+                        alert("in2");
                         sessionCallback(unescape(evt.url));
                     }
                 });
