@@ -79,8 +79,9 @@
                 e.preventDefault();
                 var ref = window.open(getAuthorizeUrl(loginUrl, clientId, redirectUri), 
                                       '_blank', 'location=no,toolbar=no');
+                alert("in");
                 ref.addEventListener('loadstop', function(evt) {
-                    alert("in");
+                    alert("in1");
                     if (evt.url.startsWith(redirectUri)) {
                         ref.close();
                         alert("in2");
