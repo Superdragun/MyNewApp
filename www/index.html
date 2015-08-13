@@ -55,8 +55,10 @@
     <script type="text/javascript">
         // OAuth Configuration
         var loginUrl    = 'https://login.salesforce.com/';
-        var clientId    = '3MVG98SW_UPr.JFgjZIWksMdw91FKVpURBPEqCPu93pIusft.hoCBpP6QUMl9OYySrXtcqPniIZubSFWpCytZ';
-        var redirectUri = 'mysampleapp://auth/success';
+        var clientId    = '3MVG9xOCXq4ID1uEzj.xI2Cj0cCCpshOIks4DfVdvoIWIhzT4cMU6fBtAPn2k8LzS65uNCuYwzxgptObvcKeg';
+        var redirectUri = 'mysampleapp://auth/success';         
+        // var clientId    = '3MVG98SW_UPr.JFgjZIWksMdw91FKVpURBPEqCPu93pIusft.hoCBpP6QUMl9OYySrXtcqPniIZubSFWpCytZ';
+        // var redirectUri = 'mysampleapp://auth/success';
         //var redirectUri = 'https://login.salesforce.com/services/oauth2/success';
         
         //var redirectUri = 'https://localhost/oauthcallback.html';
@@ -117,10 +119,10 @@
                 client.setSessionToken(oauthResponse.access_token, null,
                     oauthResponse.instance_url);
 
-                client.query("SELECT Name FROM Account LIMIT 1", 
+                client.query("SELECT Name, JSA_Decription__c FROM LVL1_JSA_Activity__c LIMIT 1", 
                     function(response){
                         $('#message').text('The first account I see is '
-                        +response.records[0].Name);
+                        +response.records[0].JSA_Decription__c);
                     }
                 );
             }
