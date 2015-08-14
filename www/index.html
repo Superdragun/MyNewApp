@@ -88,11 +88,10 @@
             } else {
                 client.setSessionToken(oauthResponse.access_token, null,
                     oauthResponse.instance_url);
-                document.getElementById('pagelanding').scrollIntoView();
                 client.query("SELECT JSA_Decription__c FROM LVL1_JSA_Activity__c LIMIT 10", 
                     function(response){
                         $('#login').hide(300);
-
+                        location.href = "#pagelanding";
                         for (i = 0; i < response.records.length; i++) { 
                             $("<li/>").appendTo("#message ul").html("Operation: "+i+" is "+response.records[i].JSA_Decription__c);
                         }
@@ -107,36 +106,7 @@
 
     </script>
   </head>
-<!--   <body>
-    <button id="login">Click here to login</button>
-    <p id="message"></p>
-  </body>
 
-  <div class-"containter">
-    <div class="jumbotron">
-        <button id="login">Login</button>
-    </div>
-    <div class="row">
-        <div class="col-xs-3">
-            <div id="panel1" class="panel panel-primary">
-                <div id="panel1text"class="panel-heading">
-                    panel1text
-                </div>
-                <div id="message" class="panel-body">
-                </div>
-            </div>
-            <div id="panel2" class="panel panel-primary">
-                <div id="panel2text"class="panel-heading">
-                    panel1text
-                </div>
-                <div id="message2" class="panel-body">
-                </div>
-            </div>            
-        </div>
-    </div>
-  </div>
-
- -->
 
 <body>
 <!-- pageone -->
@@ -148,7 +118,8 @@
   <div data-role="main" class="ui-content">
     <p>Welcome to your HSE Coach</p>
     <!-- <a href="#">A Standard Text Link</a> -->
-    <a id="login" href="#pagelanding" data-transition="slide" class="ui-btn">Login</a>
+  <!--   <a id="login" href="#pagelanding" data-transition="slide" class="ui-btn">Login</a> -->
+    <div class="ui-block-b"><button type="submit" id="login" data-theme="b">Login</button></div>
 
 
   </div>
