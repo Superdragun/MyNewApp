@@ -55,7 +55,7 @@
     <script type="text/javascript">
         // OAuth Configuration
         var loginUrl    = 'https://login.salesforce.com/';
-        var clientId    = '3MVG9xOCXq4ID1uEzj.xI2Cj0cCCpshOIks4DfVdvoIWIhzT4cMU6fBtAPn2k8LzS65uNCuYwzxgptObvcKeg';
+        var clientId    = '3MVG9xOCXq4ID1uEzj.xI2Cj0cOw7nD5rF7lUPaQBAZhappxMZcRsWK9ij6uCj6Bs4RjuqKrfAZMP85IRd2in';
         var redirectUri = 'mysampleapp://auth/success';         
         // var clientId    = '3MVG98SW_UPr.JFgjZIWksMdw91FKVpURBPEqCPu93pIusft.hoCBpP6QUMl9OYySrXtcqPniIZubSFWpCytZ';
         // var redirectUri = 'mysampleapp://auth/success';
@@ -81,9 +81,9 @@
                 e.preventDefault();
                 var ref = window.open(getAuthorizeUrl(loginUrl, clientId, redirectUri), 
                                       '_blank', 'location=no,toolbar=no');
-                alert("in");
+                // alert("in");
                 ref.addEventListener('loadstop', function(evt) {
-                    alert("in2");
+                    // alert("in2");
                     if (evt.url.startsWith(redirectUri)) {
                         ref.close();
                         alert("in2");
