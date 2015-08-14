@@ -89,12 +89,14 @@
                 client.setSessionToken(oauthResponse.access_token, null,
                     oauthResponse.instance_url);
 
-                client.query("SELECT JSA_Decription__c FROM LVL1_JSA_Activity__c LIMIT 1", 
+                client.query("SELECT JSA_Decription__c FROM LVL1_JSA_Activity__c LIMIT 10", 
                     function(response){
                         $('#login').hide(300);
-                        $('#panel1text').text('Operation');
-                        $('#message').text('The first account I see is '
-                        +response.records[0].JSA_Decription__c);
+                        for (i = 0; i < response.length; i++) { 
+                            $("<li/>").appendTo("#message ul").html("Operation: "+i+" is "+response.records[i].JSA_Decription__c);
+                        }
+                        // $('#message').text('The first account I see is '
+                        // +response.records[0].JSA_Decription__c);
                     }
                 );
             }
@@ -108,7 +110,6 @@
     <button id="login">Click here to login</button>
     <p id="message"></p>
   </body>
- -->
 
   <div class-"containter">
     <div class="jumbotron">
@@ -133,6 +134,40 @@
         </div>
     </div>
   </div>
+
+ -->
+
+<body>
+
+<div data-role="page" id="pageone" data-theme="a">
+  <div data-role="header">
+    <h1>HSE Coach</h1>
+  </div>
+
+  <div data-role="main" class="ui-content">
+    <p>Welcome to your HSE Coach</p>
+    <!-- <a href="#">A Standard Text Link</a> -->
+    <a id="login" href="#" class="ui-btn">Login</a>
+    <p>Operations:</p>
+    <div id="message" class="panel-body">
+        <ul data-role="listview" data-autodividers="true" data-inset="true">
+        </ul>
+    </div>
+    <label for="fullname">Input Field:</label>
+      <input type="text" name="fullname" id="fullname" placeholder="Name..">    
+    <label for="switch">Toggle Switch:</label>
+      <select name="switch" id="switch" data-role="slider">
+        <option value="on">On</option>
+        <option value="off" selected>Off</option>
+      </select>
+  </div>
+
+  <div data-role="footer">
+    <h1>Page Footer</h1>
+  </div>
+</div> 
+
+</body>
 
   <script>
   //************
