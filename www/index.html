@@ -88,7 +88,7 @@
             } else {
                 client.setSessionToken(oauthResponse.access_token, null,
                     oauthResponse.instance_url);
-                document.getElementById('login').click();
+                document.getElementById('pagelanding').scrollIntoView();
                 client.query("SELECT JSA_Decription__c FROM LVL1_JSA_Activity__c LIMIT 10", 
                     function(response){
                         $('#login').hide(300);
