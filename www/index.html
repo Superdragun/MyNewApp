@@ -119,10 +119,10 @@
                 client.setSessionToken(oauthResponse.access_token, null,
                     oauthResponse.instance_url);
 
-                client.query("SELECT Name FROM LVL1_JSA_Activity__c LIMIT 1", 
+                client.query("SELECT JSA_Decription__c FROM LVL1_JSA_Activity__c LIMIT 1", 
                     function(response){
                         $('#message').text('The first account I see is '
-                        +response.records[0].name);
+                        +response.records[0].JSA_Decription__c);
                     }
                 );
             }
