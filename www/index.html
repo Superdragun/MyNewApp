@@ -138,8 +138,45 @@
  -->
 
 <body>
-
+<!-- pageone -->
 <div data-role="page" id="pageone" data-theme="a">
+  <div data-role="header">
+    <h1>HSE Coach</h1>
+  </div>
+
+  <div data-role="main" class="ui-content">
+    <p>Welcome to your HSE Coach</p>
+    <!-- <a href="#">A Standard Text Link</a> -->
+    <a id="login" href="#pagelanding" data-transition="slide" class="ui-btn">Login</a>
+
+
+  </div>
+
+  <div data-role="footer">
+    <h1>&copy; slalom 2015</h1>
+  </div>
+</div> 
+<!-- pageone end -->
+<!-- pagelanding -->
+<div data-role="page" id="pagelanding" data-theme="a">
+  <div data-role="header">
+    <h1>Main Page</h1>
+  </div>
+
+  <div data-role="main" class="ui-content">
+    <h1>Please select an Option</h1>
+    <a href="#pageJSA1" data-transition="slide" >Smart JSA</a>
+    <a href="#pageSO1" data-transition="slide" >Safety Observation</a>
+    <a href="#pageSI1" data-transition="slide">Safety Incident</a>
+  </div>
+
+  <div data-role="footer">
+    <h1>&copy; slalom 2015</h1>
+  </div>
+</div> 
+<!-- pagelanding end -->
+<!-- pageJSA1-->
+<div data-role="page" id="pageJSA1" data-theme="a">
   <div data-role="header">
     <h1>HSE Coach</h1>
   </div>
@@ -153,19 +190,13 @@
         <ul data-role="listview" data-autodividers="true" data-inset="true">
         </ul>
     </div>
-    <label for="fullname">Input Field:</label>
-      <input type="text" name="fullname" id="fullname" placeholder="Name..">    
-    <label for="switch">Toggle Switch:</label>
-      <select name="switch" id="switch" data-role="slider">
-        <option value="on">On</option>
-        <option value="off" selected>Off</option>
-      </select>
   </div>
 
   <div data-role="footer">
-    <h1>Page Footer</h1>
+    <h1>&copy; slalom 2015</h1>
   </div>
 </div> 
+<!-- pageJSA1 end-->
 
 </body>
 
