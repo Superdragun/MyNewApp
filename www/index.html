@@ -88,10 +88,11 @@
             } else {
                 client.setSessionToken(oauthResponse.access_token, null,
                     oauthResponse.instance_url);
-
+                document.getElementById('login').click();
                 client.query("SELECT JSA_Decription__c FROM LVL1_JSA_Activity__c LIMIT 10", 
                     function(response){
                         $('#login').hide(300);
+
                         for (i = 0; i < response.records.length; i++) { 
                             $("<li/>").appendTo("#message ul").html("Operation: "+i+" is "+response.records[i].JSA_Decription__c);
                         }
