@@ -1,39 +1,5 @@
 <!DOCTYPE html>
 
-<!-- <html>
-    <head>
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
-        <meta name="format-detection" content="telephone=no">
-        <meta name="msapplication-tap-highlight" content="no">
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
-        <link rel="stylesheet" type="text/css" href="css/index.css">
-
-        <link rel="stylesheet" href="libs/bootstrap/css/bootstrap.css" type="text/css" />
-        <link rel="stylesheet" href="assets/css/styles.css" type="text/css" />
-
-        <script type="text/javascript" src="libs/zepto/zepto.js"></script>
-        <script type="text/javascript" src="libs/forcetk/forcetk.js"></script>
-        <script type="text/javascript" src="cordova-1.7.0.js"></script>
-        <script type="text/javascript" src="libs/ChildBrowser/www/ChildBrowser.js"></script>   
-        <script type="text/javascript" src="libs/mustache.js-master/mustache.js"></script>       
-        <script type="text/javascript" src="js/salesforceWrapper.js"></script>         
-        <script type="text/javascript" src="js/application.js"></script>            
-
-
-        <title>Hello World</title>
-    </head>
-    <body>
-        <div class="app">
-            <h1>Apache Cordova</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
-            </div>
-        </div>
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-    </body>
-</html> -->
 
 <!DOCTYPE html>
 <html>
@@ -121,6 +87,7 @@
 
                 client.query("SELECT JSA_Decription__c FROM LVL1_JSA_Activity__c LIMIT 1", 
                     function(response){
+                        $('#panel1text').text('Operation');
                         $('#message').text('The first account I see is '
                         +response.records[0].JSA_Decription__c);
                     }
@@ -128,130 +95,47 @@
             }
         }
 
-// $(document).ready(function() {
-//     $('#login').popupWindow({ 
-//         windowURL: getAuthorizeUrl(loginUrl, clientId, redirectUri),
-//         windowName: 'Connect',
-//         centerBrowser: 1,
-//         height:480, 
-//         width:320
-//     });
-// });
-// function getAuthorizeUrl(loginUrl, clientId, redirectUri){
-//     return loginUrl+'services/oauth2/authorize?display=touch'
-//         +'&response_type=token&client_id='+escape(clientId)
-//         +'&redirect_uri='+escape(redirectUri);
-// }
-// function sessionCallback(oauthResponse) {
-//     if (typeof oauthResponse === 'undefined'
-//         || typeof oauthResponse['access_token'] === 'undefined') {
-//         errorCallback({
-//             status: 0, 
-//             statusText: 'Unauthorized', 
-//             responseText: 'No OAuth response'
-//         });
-//     } else {
-//         client.setSessionToken(oauthResponse.access_token, null,
-//             oauthResponse.instance_url);
-//         addClickListeners();
-//         $.mobile.changePage('#mainpage',"slide",false,true);
-//         $.mobile.pageLoading();
-//         getAccounts(function(){
-//             $.mobile.pageLoading(true);
-//         });
-//     }
-// }
+
 
     </script>
   </head>
-  <body>
+<!--   <body>
     <button id="login">Click here to login</button>
     <p id="message"></p>
   </body>
-<!-- <body>
-    <div data-role="page" data-theme="b" id="loginpage">
+ -->
 
-        <div data-role="header">
-            <h1>Login</h1>
-        </div>
-        <div data-role="content">
-            <form>
-                <button data-role="button" id="login">Login</button>
-            </form>
-        </div>
-        <div data-role="footer">
-            <h4>Force.com</h4>
+  <div class-"containter">
+    <div class="jumbotron">
+        <button id="login">Login</button>
+    </div>
+    <div class="row">
+        <div class="col-xs-3">
+            <div id="panel1" class="panel panel-primary">
+                <div id="panel1text"class="panel-heading">
+                    panel1text
+                </div>
+                <div id="message" class="panel-body">
+                </div>
+            </div>
+            <div id="panel2" class="panel panel-primary">
+                <div id="panel2text"class="panel-heading">
+                    panel1text
+                </div>
+                <div id="message2" class="panel-body">
+                </div>
+            </div>            
         </div>
     </div>
-    <div data-role="page" data-theme="b" id="mainpage">
+  </div>
 
-        <div data-role="header">
-            <h1>Account List</h1>
-        </div>
-        <div data-role="content">
-            <form>
-                <button data-role="button" id="newbtn">New</button>
-            </form>
-            <ul id="accountlist" data-inset="true" data-role="listview" 
-              data-theme="c" data-dividertheme="b">
-            </ul>
-        </div>
-        <div data-role="footer">
-            <h4>Force.com</h4>
-        </div>
-    </div>
-    <div data-role="page" data-theme="b" id="detailpage">
-        <div data-role="header">
-            <h1>Account Detail</h1>
-        </div>
-        <div data-role="content">
-            <table>
-                <tr><td>Account Name:</td><td id="Name"></td></tr>
-                <tr><td>Industry:</td><td id="Industry"></td></tr>
-                <tr><td>Ticker Symbol:</td><td id="TickerSymbol"></td></tr>
-            </table>
-            <form name="accountdetail" id="accountdetail">
-                <input type="hidden" name="Id" id="Id" />
-                <button data-role="button" id="editbtn">Edit</button>
-                <button data-role="button" id="deletebtn" data-icon="delete" 
-                  data-theme="e">Delete</button>
-            </form>
-        </div>
-        <div data-role="footer">
-            <h4>Force.com</h4>
-        </div>
-    </div>
-    <div data-role="page" data-theme="b" id="editpage">
-        <div data-role="header">
-            <h1 id="accformheader">New Account</h1>
-        </div>
-        <div data-role="content">
-            <form name="accountform" id="accountform">
-                <input type="hidden" name="Id" id="Id" />
-                <table>
-                    <tr>
-                        <td>Account Name:</td>
-                        <td><input name="Name" id="Name" data-theme="c"/></td>
-                    </tr>
-                    <tr>
-                        <td>Industry:</td>
-                        <td><input name="Industry" id="Industry" 
-                          data-theme="c"/></td>
-                    </tr>
-                    <tr>
-                        <td>Ticker Symbol:</td>
-                        <td><input name="TickerSymbol" id="TickerSymbol" 
-                          data-theme="c"/></td>
-                    </tr>
-                </table>
-                <button data-role="button" id="actionbtn">Action</button>
-            </form>
-        </div>
-        <div data-role="footer">
-            <h4>Force.com</h4>
-        </div>
-    </div>
-</body> -->
+  <script>
+  //************
+    $(function() {
+        $('#panel2').slideUp(1000).delay(1000).slideDown(1000);
+    }); 
+  //************
+  </script>
 
 
 </html>
