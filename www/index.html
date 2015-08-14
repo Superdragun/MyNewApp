@@ -91,6 +91,7 @@
 
                 client.query("SELECT JSA_Decription__c FROM LVL1_JSA_Activity__c LIMIT 1", 
                     function(response){
+                        $('#login').hide(300);
                         $('#panel1text').text('Operation');
                         $('#message').text('The first account I see is '
                         +response.records[0].JSA_Decription__c);
