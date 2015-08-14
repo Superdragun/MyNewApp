@@ -133,13 +133,17 @@
 <div data-role="page" id="pagelanding" data-theme="a">
   <div data-role="header">
     <h1>Main Page</h1>
+    <a href='#' class="ui-btn ui-corner-all ui-btn-inline ui-mini footer-button-left ui-btn-icon-left ui-icon-carat-l">Back</a>
   </div>
 
   <div data-role="main" class="ui-content">
-    <h1>Please select an Option</h1>
-    <a href="#pageJSA1" data-transition="slide" >Smart JSA</a>
+    <h3>Please select an Option</h3>
+    <div class="ui-block-b"><button type="submit" href="#pageJSA1" id="selectbtn1" data-theme="b">Smart JSA</button></div>
+    <div class="ui-block-b"><button type="submit" href="#pageSOA1" id="selectbtn2" data-theme="b">Safety Observation</button></div>
+    <div class="ui-block-b"><button type="submit" href="#pageSIA1" id="selectbtn3" data-theme="b">Safety Incident</button></div>
+<!--     <a href="#pageJSA1" data-transition="slide" >Smart JSA</a>
     <a href="#pageSO1" data-transition="slide" >Safety Observation</a>
-    <a href="#pageSI1" data-transition="slide">Safety Incident</a>
+    <a href="#pageSI1" data-transition="slide">Safety Incident</a> -->
   </div>
 
   <div data-role="footer">
@@ -150,13 +154,13 @@
 <!-- pageJSA1-->
 <div data-role="page" id="pageJSA1" data-theme="a">
   <div data-role="header">
-    <h1>HSE Coach</h1>
+    <h1>Smart JSA</h1>
+    <a href='#' class="ui-btn ui-corner-all ui-btn-inline ui-mini footer-button-left ui-btn-icon-left ui-icon-carat-l">Back</a>
   </div>
 
   <div data-role="main" class="ui-content">
     <p>Welcome to your HSE Coach</p>
     <!-- <a href="#">A Standard Text Link</a> -->
-    <a id="login" href="#" class="ui-btn">Login</a>
     <p>Operations:</p>
     <div id="message" class="panel-body">
         <ul data-role="listview" data-autodividers="true" data-inset="true">
