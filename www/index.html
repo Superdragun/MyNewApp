@@ -20,9 +20,13 @@
     <script type="text/javascript" src="libs/jquery-mobile/js/jquery.mobile-1.4.5.min.js"></script> 
     <script type="text/javascript" src="libs/forcetk/forcetk.js"></script>
     <script type="text/javascript" src="libs/forcetk/forcetk.mobilesdk.js"></script>
+
     <!-- <script type="text/javascript" src="libs/jquery-mobile/js/mobileapp.js"></script> -->
     
     <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="plugins/com.salesforce/com.salesforce.util.logger.js"></script>
+    <script type="text/javascript" src="plugins/com.salesforce/com.salesforce.plugin.oauth.js"></script>    
+    <script type="text/javascript" src="plugins/com.salesforce/com.salesforce.util.exec.js"></script>
     <script type="text/javascript">
         // OAuth Configuration
         var loginUrl    = 'https://login.salesforce.com/';
@@ -141,8 +145,10 @@
         if (creds.data)  // Event sets the `data` object with the auth data.
             credsData = creds.data;
 
-        forcetkClient = new forcetk.Client(credsData.clientId, credsData.loginUrl, null,
-            cordova.require("com.salesforce.plugin.oauth").forcetkRefresh);
+        // forcetkClient = new forcetk.Client(credsData.clientId, credsData.loginUrl, null,
+        //     cordova.require("com.salesforce.plugin.oauth").forcetkRefresh);
+        forcetkClient = new forcetk.Client(clientId, loginUrl, null,
+            cordova.require("com.salesforce.plugin.oauth").forcetkRefresh);        
         forcetkClient.setSessionToken(credsData.accessToken, apiVersion, credsData.instanceUrl);
         forcetkClient.setRefreshToken(credsData.refreshToken);
         forcetkClient.setUserAgentString(credsData.userAgent);
