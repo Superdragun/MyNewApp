@@ -19,6 +19,7 @@
     <script type="text/javascript" src="libs/jquery-mobile/plugin/Popup/assets/js/jquery.popup.js" security="none" ></script>
     <script type="text/javascript" src="libs/jquery-mobile/js/jquery.mobile-1.4.5.min.js"></script> 
     <script type="text/javascript" src="libs/forcetk/forcetk.js"></script>
+    <script type="text/javascript" src="libs/forcetk/forcetk.mobilesdk.js"></script>
     <!-- <script type="text/javascript" src="libs/jquery-mobile/js/mobileapp.js"></script> -->
     
     <script type="text/javascript" src="cordova.js"></script>
@@ -35,73 +36,123 @@
         // var redirectUri = 'https://localhost/jsapp/oauthcallback.html';
         //var proxyUrl    = 'https://localhost/jsapp/proxy.php?mode=native';
 
+// ****************************************************************
+        // var client = new forcetk.Client(clientId, loginUrl);
 
-        var client = new forcetk.Client(clientId, loginUrl);
+        // // Make our own startsWith utility fn
+        // if (!String.prototype.startsWith) {
+        //   String.prototype.startsWith = function(searchString, position) {
+        //     position = position || 0;
+        //     return this.lastIndexOf(searchString, position) === position;
+        //   };
+        // }
 
-        // Make our own startsWith utility fn
-        if (!String.prototype.startsWith) {
-          String.prototype.startsWith = function(searchString, position) {
-            position = position || 0;
-            return this.lastIndexOf(searchString, position) === position;
-          };
-        }
+        // document.addEventListener("deviceready", function(){
+        //     $('#login').click(function(e) {
+        //         e.preventDefault();
+        //         var ref = window.open(getAuthorizeUrl(loginUrl, clientId, redirectUri), 
+        //                               '_blank', 'location=no,toolbar=no');
+        //         // alert("in");
+        //         ref.addEventListener('loadstop', function(evt) {
+        //             // alert("in2");
+        //             if (evt.url.startsWith(redirectUri)) {
+        //                 ref.close();
+        //                 alert("in2");
+        //                 sessionCallback(unescape(evt.url));
+        //             }
+        //         });
+        //     });
+        // });
 
-        document.addEventListener("deviceready", function(){
-            $('#login').click(function(e) {
-                e.preventDefault();
-                var ref = window.open(getAuthorizeUrl(loginUrl, clientId, redirectUri), 
-                                      '_blank', 'location=no,toolbar=no');
-                // alert("in");
-                ref.addEventListener('loadstop', function(evt) {
-                    // alert("in2");
-                    if (evt.url.startsWith(redirectUri)) {
-                        ref.close();
-                        alert("in2");
-                        sessionCallback(unescape(evt.url));
-                    }
-                });
-            });
-        });
+        // function getAuthorizeUrl(loginUrl, clientId, redirectUri){
+        //     return loginUrl+'services/oauth2/authorize?display=touch'
+        //         +'&response_type=token&client_id='+escape(clientId)
+        //         +'&redirect_uri='+escape(redirectUri);
+        // }
 
-        function getAuthorizeUrl(loginUrl, clientId, redirectUri){
-            return loginUrl+'services/oauth2/authorize?display=touch'
-                +'&response_type=token&client_id='+escape(clientId)
-                +'&redirect_uri='+escape(redirectUri);
-        }
+        // function sessionCallback(loc) {
+        //     var oauthResponse = {};
 
-        function sessionCallback(loc) {
-            var oauthResponse = {};
+        //     var fragment = loc.split("#")[1];
 
-            var fragment = loc.split("#")[1];
+        //     if (fragment) {
+        //         var nvps = fragment.split('&');
+        //         for (var nvp in nvps) {
+        //             var parts = nvps[nvp].split('=');
+        //             oauthResponse[parts[0]] = unescape(parts[1]);
+        //         }
+        //     }
 
-            if (fragment) {
-                var nvps = fragment.split('&');
-                for (var nvp in nvps) {
-                    var parts = nvps[nvp].split('=');
-                    oauthResponse[parts[0]] = unescape(parts[1]);
-                }
-            }
+        //     if (typeof oauthResponse === 'undefined'
+        //         || typeof oauthResponse['access_token'] === 'undefined') {
+        //         alert("Unauthorized: No OAuth response");
+        //     } else {
+        //         client.setSessionToken(oauthResponse.access_token, null,
+        //             oauthResponse.instance_url);
+        //         client.setRefreshToken(oauthResponse.refreshToken);
+        //         Client.setUserAgentString(oauthResponse.userAgent);
+        //         client.query("SELECT JSA_Decription__c FROM LVL1_JSA_Activity__c LIMIT 10", 
+        //             function(response){
+        //                 $('#login').hide(300);
+        //                 location.href = "#pagelanding";
+        //                 for (i = 0; i < response.records.length; i++) { 
+        //                     $("<li/>").appendTo("#message ul").html("Operation: "+i+" is "+response.records[i].JSA_Decription__c);
+        //                 }
+        //                 // $('#message').text('The first account I see is '
+        //                 // +response.records[0].JSA_Decription__c);
+        //             }
+        //         );
+        //     }
+        // }
+//***************************************************************************
+    var forcetkClient;
+    var debugMode = true;
 
-            if (typeof oauthResponse === 'undefined'
-                || typeof oauthResponse['access_token'] === 'undefined') {
-                alert("Unauthorized: No OAuth response");
-            } else {
-                client.setSessionToken(oauthResponse.access_token, null,
-                    oauthResponse.instance_url);
-                client.query("SELECT JSA_Decription__c FROM LVL1_JSA_Activity__c LIMIT 10", 
-                    function(response){
-                        $('#login').hide(300);
-                        location.href = "#pagelanding";
-                        for (i = 0; i < response.records.length; i++) { 
-                            $("<li/>").appendTo("#message ul").html("Operation: "+i+" is "+response.records[i].JSA_Decription__c);
-                        }
-                        // $('#message').text('The first account I see is '
-                        // +response.records[0].JSA_Decription__c);
-                    }
-                );
-            }
-        }
+    jQuery(document).ready(function() {
+        //Add event listeners and so forth here
+        document.addEventListener("deviceready", onDeviceReady,false);
 
+    });
+
+    // When this function is called, Cordova has been initialized and is ready to roll 
+    function onDeviceReady() {
+        cordova.require("com.salesforce.util.logger").logToConsole("onDeviceReady: Cordova ready");
+        //Call getAuthCredentials to get the initial session credentials
+        cordova.require("com.salesforce.plugin.oauth").getAuthCredentials(salesforceSessionRefreshed, getAuthCredentialsError);
+
+        //register to receive notifications when autoRefreshOnForeground refreshes the sfdc session
+        document.addEventListener("salesforceSessionRefresh",salesforceSessionRefreshed,false);
+
+        //enable buttons
+        //regLinkClickHandlers();
+
+        // retrieve Merchandise records, including the Id for links
+        
+
+    }
+        
+
+    function salesforceSessionRefreshed(creds) {
+        cordova.require("com.salesforce.util.logger").logToConsole("salesforceSessionRefreshed");
+        
+        // Depending on how we come into this method, `creds` may be callback data from the auth
+        // plugin, or an event fired from the plugin.  The data is different between the two.
+        var credsData = creds;
+        if (creds.data)  // Event sets the `data` object with the auth data.
+            credsData = creds.data;
+
+        forcetkClient = new forcetk.Client(credsData.clientId, credsData.loginUrl, null,
+            cordova.require("com.salesforce.plugin.oauth").forcetkRefresh);
+        forcetkClient.setSessionToken(credsData.accessToken, apiVersion, credsData.instanceUrl);
+        forcetkClient.setRefreshToken(credsData.refreshToken);
+        forcetkClient.setUserAgentString(credsData.userAgent);
+
+        forcetkClient.query("SELECT Id, Name, Price__c, Quantity__c FROM Merchandise__c", onSuccessSfdcMerchandise, onErrorSfdc);
+    }
+
+    function getAuthCredentialsError(error) {
+        cordova.require("com.salesforce.util.logger").logToConsole("getAuthCredentialsError: " + error);
+    }
 
 
     </script>
@@ -133,14 +184,21 @@
 <div data-role="page" id="pagelanding" data-theme="a">
   <div data-role="header">
     <h1>Main Page</h1>
-    <a href='#' class="ui-btn ui-corner-all ui-btn-inline ui-mini footer-button-left ui-btn-icon-left ui-icon-carat-l">Back</a>
+<!--     <a href='#pageone' class="ui-btn ui-corner-all ui-btn-inline ui-mini footer-button-left ui-btn-icon-left ui-icon-carat-l">Back</a> -->
+    <div data-role="navbar">
+        <ul>
+            <li><a href="#pageone" data=icon="grid">Home</a></li>
+            <li><a href="#pageone" data=icon="arrow-d-r">Safety Observations</a></li>
+            <li><a href="#pageone" data=icon="arrow-d-r">Safety Incident</a></li>
+        </ul>
+    </div>    
   </div>
 
   <div data-role="main" class="ui-content">
     <h3>Please select an Option</h3>
-    <div class="ui-block-b"><button type="submit" href="#pageJSA1" id="selectbtn1" data-theme="b">Smart JSA</button></div>
-    <div class="ui-block-b"><button type="submit" href="#pageSOA1" id="selectbtn2" data-theme="b">Safety Observation</button></div>
-    <div class="ui-block-b"><button type="submit" href="#pageSIA1" id="selectbtn3" data-theme="b">Safety Incident</button></div>
+    <div class="ui-block-b"><button type="submit" href="#pageJSA1" id="selectbtn1" data-theme="b">Smart JSA</button></div><br>
+    <div class="ui-block-b"><button type="submit" href="#pageSOA1" id="selectbtn2" data-theme="b">Safety Observation</button></div><br>
+    <div class="ui-block-b"><button type="submit" href="#pageSIA1" id="selectbtn3" data-theme="b">Safety Incident</button></div><br>
 <!--     <a href="#pageJSA1" data-transition="slide" >Smart JSA</a>
     <a href="#pageSO1" data-transition="slide" >Safety Observation</a>
     <a href="#pageSI1" data-transition="slide">Safety Incident</a> -->
