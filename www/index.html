@@ -152,17 +152,20 @@ alert("4");
 alert("5");
         // Depending on how we come into this method, `creds` may be callback data from the auth
         // plugin, or an event fired from the plugin.  The data is different between the two.
-        var credsData = creds;
-        if (creds.data)  // Event sets the `data` object with the auth data.
-            credsData = creds.data;
+
+        // var credsData = creds;
+        // if (creds.data)  // Event sets the `data` object with the auth data.
+        //     credsData = creds.data;
+
+        // forcetkClient = new forcetk.Client(credsData.clientId, credsData.loginUrl, null,
+        //     cordova.require("com.salesforce.plugin.oauth").forcetkRefresh);       
+        // forcetkClient.setSessionToken(credsData.accessToken, apiVersion, credsData.instanceUrl);
+        // forcetkClient.setRefreshToken(credsData.refreshToken);
+        // forcetkClient.setUserAgentString(credsData.userAgent);
+        forcetkClient = new forcetk.Client(clientId, loginUrl, null,
+            cordova.require("com.salesforce.plugin.oauth").forcetkRefresh); 
 alert("6");
-        forcetkClient = new forcetk.Client(credsData.clientId, credsData.loginUrl, null,
-            cordova.require("com.salesforce.plugin.oauth").forcetkRefresh);       
-        forcetkClient.setSessionToken(credsData.accessToken, apiVersion, credsData.instanceUrl);
-        forcetkClient.setRefreshToken(credsData.refreshToken);
-        forcetkClient.setUserAgentString(credsData.userAgent);
-        // forcetkClient = new forcetk.Client(clientId, loginUrl, null,
-        //     cordova.require("com.salesforce.plugin.oauth").forcetkRefresh); 
+
 
         forcetkClient.query("SELECT JSA_Decription__c FROM LVL1_JSA_Activity__c LIMIT 10", 
             function(response){
