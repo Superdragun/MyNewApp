@@ -119,11 +119,13 @@
     var forcetkClient;
     var debugMode = true;
 
-    jQuery(document).ready(function() {
-        //Add event listeners and so forth here
-        document.addEventListener("deviceready", onDeviceReady,false);
+    // jQuery(document).ready(function() {
+    //     //Add event listeners and so forth here
+    //     document.addEventListener("deviceready", onDeviceReady,false);
 
-    });
+    // });
+
+    document.addEventListener("deviceready", onDeviceReady,false);
 
     // When this function is called, Cordova has been initialized and is ready to roll 
     function onDeviceReady() {
