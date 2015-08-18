@@ -51,127 +51,62 @@
         //var proxyUrl    = 'https://localhost/jsapp/proxy.php?mode=native';
 
 // ****************************************************************
-        // var client = new forcetk.Client(clientId, loginUrl);
+        var client = new forcetk.Client(clientId, loginUrl);
 
-        // // Make our own startsWith utility fn
-        // if (!String.prototype.startsWith) {
-        //   String.prototype.startsWith = function(searchString, position) {
-        //     position = position || 0;
-        //     return this.lastIndexOf(searchString, position) === position;
-        //   };
-        // }
+        // Make our own startsWith utility fn
+        if (!String.prototype.startsWith) {
+          String.prototype.startsWith = function(searchString, position) {
+            position = position || 0;
+            return this.lastIndexOf(searchString, position) === position;
+          };
+        }
 
-        // document.addEventListener("deviceready", function(){
-        //     $('#login').click(function(e) {
-        //         e.preventDefault();
-        //         var ref = window.open(getAuthorizeUrl(loginUrl, clientId, redirectUri), 
-        //                               '_blank', 'location=no,toolbar=no');
-        //         // alert("in");
-        //         ref.addEventListener('loadstop', function(evt) {
-        //             // alert("in2");
-        //             if (evt.url.startsWith(redirectUri)) {
-        //                 ref.close();
-        //                 alert("in2");
-        //                 sessionCallback(unescape(evt.url));
-        //             }
-        //         });
-        //     });
-        // });
+        document.addEventListener("deviceready", function(){
+            $('#login').click(function(e) {
+                e.preventDefault();
+                var ref = window.open(getAuthorizeUrl(loginUrl, clientId, redirectUri), 
+                                      '_blank', 'location=no,toolbar=no');
+                // alert("in");
+                ref.addEventListener('loadstop', function(evt) {
+                    // alert("in2");
+                    if (evt.url.startsWith(redirectUri)) {
+                        ref.close();
+                        alert("in2");
+                        sessionCallback(unescape(evt.url));
+                    }
+                });
+            });
+        });
 
-        // function getAuthorizeUrl(loginUrl, clientId, redirectUri){
-        //     return loginUrl+'services/oauth2/authorize?display=touch'
-        //         +'&response_type=token&client_id='+escape(clientId)
-        //         +'&redirect_uri='+escape(redirectUri);
-        // }
+        function getAuthorizeUrl(loginUrl, clientId, redirectUri){
+            return loginUrl+'services/oauth2/authorize?display=touch'
+                +'&response_type=token&client_id='+escape(clientId)
+                +'&redirect_uri='+escape(redirectUri);
+        }
 
-        // function sessionCallback(loc) {
-        //     var oauthResponse = {};
+        function sessionCallback(loc) {
+            var oauthResponse = {};
 
-        //     var fragment = loc.split("#")[1];
+            var fragment = loc.split("#")[1];
 
-        //     if (fragment) {
-        //         var nvps = fragment.split('&');
-        //         for (var nvp in nvps) {
-        //             var parts = nvps[nvp].split('=');
-        //             oauthResponse[parts[0]] = unescape(parts[1]);
-        //         }
-        //     }
+            if (fragment) {
+                var nvps = fragment.split('&');
+                for (var nvp in nvps) {
+                    var parts = nvps[nvp].split('=');
+                    oauthResponse[parts[0]] = unescape(parts[1]);
+                }
+            }
 
-        //     if (typeof oauthResponse === 'undefined'
-        //         || typeof oauthResponse['access_token'] === 'undefined') {
-        //         alert("Unauthorized: No OAuth response");
-        //     } else {
-        //         client.setSessionToken(oauthResponse.access_token, null,
-        //             oauthResponse.instance_url);
-        //         client.setRefreshToken(oauthResponse.refreshToken);
-        //         Client.setUserAgentString(oauthResponse.userAgent);
-        //         client.query("SELECT JSA_Decription__c FROM LVL1_JSA_Activity__c LIMIT 10", 
-        //             function(response){
-        //                 $('#login').hide(300);
-        //                 location.href = "#pagelanding";
-        //                 for (i = 0; i < response.records.length; i++) { 
-        //                     $("<li/>").appendTo("#message ul").html("Operation: "+i+" is "+response.records[i].JSA_Decription__c);
-        //                 }
-        //                 // $('#message').text('The first account I see is '
-        //                 // +response.records[0].JSA_Decription__c);
-        //             }
-        //         );
-        //     }
-        // }
-//***************************************************************************
-    var forcetkClient;
-    var debugMode = true;
-
-    // jQuery(document).ready(function() {
-    //     //Add event listeners and so forth here
-    //     document.addEventListener("deviceready", onDeviceReady,false);
-
-    // });
-
-    document.addEventListener("deviceready", onDeviceReady,false);
-
-    // When this function is called, Cordova has been initialized and is ready to roll 
-    function onDeviceReady() {
-        cordova.require("com.salesforce.util.logger").logToConsole("onDeviceReady: Cordova ready");
-        //Call getAuthCredentials to get the initial session credentials
-alert("1");        
-        cordova.require("com.salesforce.plugin.oauth").getAuthCredentials(salesforceSessionRefreshed, getAuthCredentialsError);
-alert("2");
-        //register to receive notifications when autoRefreshOnForeground refreshes the sfdc session
-        document.addEventListener("salesforceSessionRefresh",salesforceSessionRefreshed,false);
-alert("3");
-        //enable buttons
-        //regLinkClickHandlers();
-salesforceSessionRefreshed();
-alert("4");
-        // retrieve Merchandise records, including the Id for links
-        
-
-    }
-        
-
-    function salesforceSessionRefreshed(creds) {
-        cordova.require("com.salesforce.util.logger").logToConsole("salesforceSessionRefreshed");
-alert("5");
-        // Depending on how we come into this method, `creds` may be callback data from the auth
-        // plugin, or an event fired from the plugin.  The data is different between the two.
-
-        // var credsData = creds;
-        // if (creds.data)  // Event sets the `data` object with the auth data.
-        //     credsData = creds.data;
-
-        // forcetkClient = new forcetk.Client(credsData.clientId, credsData.loginUrl, null,
-        //     cordova.require("com.salesforce.plugin.oauth").forcetkRefresh);       
-        // forcetkClient.setSessionToken(credsData.accessToken, apiVersion, credsData.instanceUrl);
-        // forcetkClient.setRefreshToken(credsData.refreshToken);
-        // forcetkClient.setUserAgentString(credsData.userAgent);
-        forcetkClient = new forcetk.Client(clientId, loginUrl, null,
-            cordova.require("com.salesforce.plugin.oauth").forcetkRefresh); 
-alert("6");
-
-
-        forcetkClient.query("SELECT JSA_Decription__c FROM LVL1_JSA_Activity__c LIMIT 10", 
-            function(response){
+            if (typeof oauthResponse === 'undefined'
+                || typeof oauthResponse['access_token'] === 'undefined') {
+                alert("Unauthorized: No OAuth response");
+            } else {
+                client.setSessionToken(oauthResponse.access_token, null,
+                    oauthResponse.instance_url);
+                client.setRefreshToken(oauthResponse.refreshToken);
+                Client.setUserAgentString(oauthResponse.userAgent);
+                client.query("SELECT JSA_Decription__c FROM LVL1_JSA_Activity__c LIMIT 10", 
+                    function(response){
                         $('#login').hide(300);
                         location.href = "#pagelanding";
                         for (i = 0; i < response.records.length; i++) { 
@@ -179,13 +114,78 @@ alert("6");
                         }
                         // $('#message').text('The first account I see is '
                         // +response.records[0].JSA_Decription__c);
-                    }            
-            );
-    }
+                    }
+                );
+            }
+        }
+//***************************************************************************
+//     var forcetkClient;
+//     var debugMode = true;
 
-    function getAuthCredentialsError(error) {
-        cordova.require("com.salesforce.util.logger").logToConsole("getAuthCredentialsError: " + error);
-    }
+//     // jQuery(document).ready(function() {
+//     //     //Add event listeners and so forth here
+//     //     document.addEventListener("deviceready", onDeviceReady,false);
+
+//     // });
+
+//     document.addEventListener("deviceready", onDeviceReady,false);
+
+//     // When this function is called, Cordova has been initialized and is ready to roll 
+//     function onDeviceReady() {
+//         cordova.require("com.salesforce.util.logger").logToConsole("onDeviceReady: Cordova ready");
+//         //Call getAuthCredentials to get the initial session credentials
+// alert("1");        
+//         cordova.require("com.salesforce.plugin.oauth").getAuthCredentials(salesforceSessionRefreshed, getAuthCredentialsError);
+// alert("2");
+//         //register to receive notifications when autoRefreshOnForeground refreshes the sfdc session
+//         document.addEventListener("salesforceSessionRefresh",salesforceSessionRefreshed,false);
+// alert("3");
+//         //enable buttons
+//         //regLinkClickHandlers();
+// salesforceSessionRefreshed();
+// alert("4");
+//         // retrieve Merchandise records, including the Id for links
+        
+
+//     }
+        
+
+//     function salesforceSessionRefreshed(creds) {
+//         cordova.require("com.salesforce.util.logger").logToConsole("salesforceSessionRefreshed");
+// alert("5");
+//         // Depending on how we come into this method, `creds` may be callback data from the auth
+//         // plugin, or an event fired from the plugin.  The data is different between the two.
+
+//         // var credsData = creds;
+//         // if (creds.data)  // Event sets the `data` object with the auth data.
+//         //     credsData = creds.data;
+
+//         // forcetkClient = new forcetk.Client(credsData.clientId, credsData.loginUrl, null,
+//         //     cordova.require("com.salesforce.plugin.oauth").forcetkRefresh);       
+//         // forcetkClient.setSessionToken(credsData.accessToken, apiVersion, credsData.instanceUrl);
+//         // forcetkClient.setRefreshToken(credsData.refreshToken);
+//         // forcetkClient.setUserAgentString(credsData.userAgent);
+//         forcetkClient = new forcetk.Client(clientId, loginUrl, null,
+//             cordova.require("com.salesforce.plugin.oauth").forcetkRefresh); 
+// alert("6");
+
+
+//         forcetkClient.query("SELECT JSA_Decription__c FROM LVL1_JSA_Activity__c LIMIT 10", 
+//             function(response){
+//                         $('#login').hide(300);
+//                         location.href = "#pagelanding";
+//                         for (i = 0; i < response.records.length; i++) { 
+//                             $("<li/>").appendTo("#message ul").html("Operation: "+i+" is "+response.records[i].JSA_Decription__c);
+//                         }
+//                         // $('#message').text('The first account I see is '
+//                         // +response.records[0].JSA_Decription__c);
+//                     }            
+//             );
+//     }
+
+//     function getAuthCredentialsError(error) {
+//         cordova.require("com.salesforce.util.logger").logToConsole("getAuthCredentialsError: " + error);
+//     }
 
 
     </script>
