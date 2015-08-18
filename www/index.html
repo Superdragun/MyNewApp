@@ -104,7 +104,7 @@
                 client.setSessionToken(oauthResponse.access_token, null,
                     oauthResponse.instance_url);
                 client.setRefreshToken(oauthResponse.refreshToken);
-                Client.setUserAgentString(oauthResponse.userAgent);
+                client.setUserAgentString(oauthResponse.userAgent);
                 client.query("SELECT JSA_Decription__c FROM LVL1_JSA_Activity__c LIMIT 10", 
                     function(response){
                         $('#login').hide(300);
