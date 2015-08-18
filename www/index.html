@@ -71,7 +71,7 @@
                     // alert("in2");
                     if (evt.url.startsWith(redirectUri)) {
                         ref.close();
-                        alert("in2");
+                        //alert("in2");
                         sessionCallback(unescape(evt.url));
                     }
                 });
@@ -229,9 +229,9 @@
 
   <div data-role="main" class="ui-content">
     <h3>Please select an Option</h3>
-    <div class="ui-block-b"><button type="submit" href="#pageJSA1" id="selectbtn1" data-theme="b">Smart JSA</button></div><br>
-    <div class="ui-block-b"><button type="submit" href="#pageSOA1" id="selectbtn2" data-theme="b">Safety Observation</button></div><br>
-    <div class="ui-block-b"><button type="submit" href="#pageSIA1" id="selectbtn3" data-theme="b">Safety Incident</button></div><br>
+    <p><div class="ui-block-b"><button type="submit" href="#pageJSA1" id="selectbtn1" data-theme="b">Smart JSA</button></div></p>
+    <p><div class="ui-block-b"><button type="submit" href="#pageSOA1" id="selectbtn2" data-theme="b">Safety Observation</button></div></p>
+    <p><div class="ui-block-b"><button type="submit" href="#pageSIA1" id="selectbtn3" data-theme="b">Safety Incident</button></div></p>
 <!--     <a href="#pageJSA1" data-transition="slide" >Smart JSA</a>
     <a href="#pageSO1" data-transition="slide" >Safety Observation</a>
     <a href="#pageSI1" data-transition="slide">Safety Incident</a> -->
