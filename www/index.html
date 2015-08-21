@@ -5,6 +5,19 @@
 <html>
   <head>
     <title>ForceTK Demo</title>
+    <style>
+    #footer
+{
+    width: 100%;
+    height: 50px;
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    /*text-align, background-color, and other specific styles can be applied here. You can change the height from 30px to anything which suits your needs. You can even comment Left: 0px & Right: 0px, but to make sure that it works in all browsers, lets leave them there.*/
+}
+    </style>
+
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />
 
@@ -76,6 +89,15 @@
                     }
                 });
             });
+            $('#selectbtn1').click(function(e) {
+                location.href = "#pageJSA1";                
+            }    
+            $('#selectbtn2').click(function(e) {
+                location.href = "#pageSO1";
+            } 
+            $('#selectbtn3').click(function(e) {
+                location.href = "#pageSI1";
+            }                         
         });
 
         function getAuthorizeUrl(loginUrl, clientId, redirectUri){
@@ -192,23 +214,23 @@
   </head>
 
 
-<body background="img\petrolio.jpg">
+<body>
 <!-- pageone -->
-<div data-role="page" id="pageone" data-theme="a">
+<div data-role="page" style="background-image: url(img/back.jpg);background-size: cover;" id="pageone" data-theme="a">
   <div data-role="header">
     <h1>HSE Coach</h1>
   </div>
 
-  <div data-role="main" class="ui-content">
+  <div data-role="main" style="justify-content: center;text-align: center;" class="ui-content">
     <p>Welcome to your HSE Coach</p>
     <!-- <a href="#">A Standard Text Link</a> -->
   <!--   <a id="login" href="#pagelanding" data-transition="slide" class="ui-btn">Login</a> -->
-    <div class="ui-block-b"><button type="submit" id="login" data-theme="b">Login</button></div>
+    <div class="ui-block-b" ><button type="submit" id="login" data-theme="b">Login</button></div>
 
 
   </div>
 
-  <div data-role="footer">
+  <div data-role="footer" id="footer" >
     <h1>&copy; slalom 2015</h1>
   </div>
 </div> 
@@ -229,9 +251,9 @@
 
   <div data-role="main" class="ui-content">
     <h3>Please select an Option</h3>
-    <p><div class="ui-block-b" style="width:50px; margin:0 auto;"><button type="submit" href="#pageJSA1" id="selectbtn1" data-theme="b">Smart JSA</button></div></p>
-    <p><div class="ui-block-b" style="width:50px; margin:0 auto;"><button type="submit" href="#pageSOA1" id="selectbtn2" data-theme="b">Safety Observation</button></div></p>
-    <p><div class="ui-block-b" style="width:50px; margin:0 auto;"><button type="submit" href="#pageSIA1" id="selectbtn3" data-theme="b">Safety Incident</button></div></p>
+    <p><div class="ui-block-b" style="width:50px; margin:0 auto;"><button type="submit" id="selectbtn1" data-theme="b">Smart JSA</button></div></p>
+    <p><div class="ui-block-b" style="width:50px; margin:0 auto;"><button type="submit" id="selectbtn2" data-theme="b">Safety Observation</button></div></p>
+    <p><div class="ui-block-b" style="width:50px; margin:0 auto;"><button type="submit" id="selectbtn3" data-theme="b">Safety Incident</button></div></p>
 <!--     <a href="#pageJSA1" data-transition="slide" >Smart JSA</a>
     <a href="#pageSO1" data-transition="slide" >Safety Observation</a>
     <a href="#pageSI1" data-transition="slide">Safety Incident</a> -->
@@ -264,7 +286,50 @@
   </div>
 </div> 
 <!-- pageJSA1 end-->
+<!-- pageSO1-->
+<div data-role="page" id="pageSO1" data-theme="a">
+  <div data-role="header">
+    <h1>Smart JSA</h1>
+    <a href='#' class="ui-btn ui-corner-all ui-btn-inline ui-mini footer-button-left ui-btn-icon-left ui-icon-carat-l">Back</a>
+  </div>
 
+  <div data-role="main" class="ui-content">
+    <p>Safety Observation</p>
+    <!-- <a href="#">A Standard Text Link</a> -->
+    <p>Record your Safety Observation</p>
+    <div id="message" class="panel-body">
+        <ul data-role="listview" data-autodividers="true" data-inset="true">
+        </ul>
+    </div>
+  </div>
+
+  <div data-role="footer">
+    <h1>&copy; slalom 2015</h1>
+  </div>
+</div> 
+<!-- pageSO1 end-->
+<!-- pageSI1-->
+<div data-role="page" id="pageSI1" data-theme="a">
+  <div data-role="header">
+    <h1>Safety Incident</h1>
+    <a href='#' class="ui-btn ui-corner-all ui-btn-inline ui-mini footer-button-left ui-btn-icon-left ui-icon-carat-l">Back</a>
+  </div>
+
+  <div data-role="main" class="ui-content">
+    <p>Welcome to your HSE Coach</p>
+    <!-- <a href="#">A Standard Text Link</a> -->
+    <p>Record your Safety Incident</p>
+    <div id="message" class="panel-body">
+        <ul data-role="listview" data-autodividers="true" data-inset="true">
+        </ul>
+    </div>
+  </div>
+
+  <div data-role="footer">
+    <h1>&copy; slalom 2015</h1>
+  </div>
+</div> 
+<!-- pageSI1 end-->
 </body>
 
   <script>
