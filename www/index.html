@@ -65,7 +65,7 @@
             $('#login').click(function(e) {
                 e.preventDefault();
                 var ref = window.open(getAuthorizeUrl(loginUrl, clientId, redirectUri), 
-                                      '_self', 'location=no,toolbar=no');
+                                      '_blank', 'location=no,toolbar=no');
                 // alert("in"); _blank
                 ref.addEventListener('loadstop', function(evt) {
                     // alert("in2");
