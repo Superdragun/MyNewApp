@@ -75,7 +75,6 @@
         }
 
         document.addEventListener("deviceready", function(){
-            FastClick.attach(document.body);
             $('#login').click(function(e) {
                 e.preventDefault();
                 var ref = window.open(getAuthorizeUrl(loginUrl, clientId, redirectUri), 
